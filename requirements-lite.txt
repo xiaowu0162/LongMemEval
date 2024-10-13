@@ -1,0 +1,5 @@
+openai==1.35.1
+tqdm==4.66.4
+backoff==2.2.1
+numpy==1.26.3
+nltk==3.9.1

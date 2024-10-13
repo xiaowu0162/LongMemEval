@@ -9,6 +9,7 @@ if len(sys.argv) != 2:
 
 in_file = sys.argv[1]
 in_data = [json.loads(line) for line in open(in_file).readlines()]
+in_data = [x for x in in_data if '_abs' not in x['question_id']]
 
 task2type = {
     'single_hop': 'single_needle',
@@ -40,19 +41,3 @@ try:
 except:
     pass
 
-
-# ref_entry = ref_data[entry['question_id']]
-# assert entry['autoeval_label']['model'] == 'gpt-4o-2024-08-06'
-# type2acc[task2type[ref_entry['question_type']]].append(1 if entry['autoeval_label']['label'] else 0)
-
-# all_acc = []
-# task_acc = []
-# print('\nEvaluation results by task:')
-# for k, v in type2acc.items():
-#     print('\t{}: {} ({})'.format(k, round(np.mean(v), 4), len(v)))
-#     all_acc += v
-#     task_acc.append(np.mean(v))
-
-# print('\nTask-averaged Accuracy:', round(np.mean(task_acc), 4))
-
-# print('\nOverall Accuracy:', round(np.mean(all_acc), 4))

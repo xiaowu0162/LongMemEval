@@ -38,7 +38,7 @@ If you also would like to run the memory systems introduced in the paper, please
 ```
 conda create -n longmemeval python=3.9
 conda activate longmemeval
-pip install torch==2.1.2 torchvision==0.16.2 torchaudio==2.1.2 --index-url https://download.pytorch.org/whl/cu121
+pip install torch==2.3.1 torchvision==0.18.1 torchaudio==2.3.1 --index-url https://download.pytorch.org/whl/cu121
 pip install -r requirements-full.txt
 ```
 We have tested this environment on a Linux machine with CUDA 12.1. If you use a different platform, you may need to modify the requirements.
@@ -124,18 +124,66 @@ A log file will be generated under the folder `generation_logs/`. You can then f
 
 ### Memory Retrieval
 
+To run memory indexing and retrieval on LongMemEval, following the instructions below.
 
 #### Baseline Retrieval
 
+You may use the following command to run the baseline retrieval:
+```
+cd src/retrieval
+bash run_retrieval.sh IN_FILE RETRIEVER GRANULARITY
+```
+* `IN_FILE`: the path 
+* `RETRIEVER`: `flat-bm25`, `flat-contriever`, `flat-stella` (Stella V5 1.5B), or `flat-gte` (gte-Qwen2-7B-instruct). For `flat-stella`, our code requires downloading the model manually from [the original repository](https://huggingface.co/dunzhang/stella_en_1.5B_v5).
+* `GRANULARITY`: the value granularity of the memory index, we support `turn` or `session`.
+
+Note that for the dense embedding models, we support multi-GPU retrieval. By default, the code will utilize all the available GPUs. 
+
+The script will output the retrieval results under `retrieval_logs/` and print out the evaluation metrics. You may print out the metrics from the log as well by:
+```
+python3 src/evaluation/print_retrieval_metrics.py log_file
+```
+
+Also note that for evaluating the retrieval, we always skip the 30 abstention instances. This is because these instances generally refer to non-existing events and do not have a ground truth answer location.
 
 #### Index Expansion
 
+To run the experiments with key expansion, download the released key expansion outputs in this [link](https://drive.google.com/file/d/11GGLql5raBn-n7I_v3bSxtyH3ttxATC7/view?usp=sharing) and place the data under the directory `LongMemEval/index_expansion_logs/`. Then, you may run the following command
+```
+cd src/retrieval
+bash run_retrieval.sh IN_FILE RETRIEVER GRANULARITY EXPANSION_TYPE JOIN_MODE CACHE
+```
+* `EXPANSION_TYPE`: we support `session-summ`, `session-keyphrase`, `session-userfact`, `turn-keyphrase`, `turn-userfact`
+* `JOIN_MODE`: we support three modes:
+    * `separate`: add a new (key, value) pair with the expansion as the key.
+    * `merge`: merge the expansion and the original key to get the new key.
+    * `replace`: replace the original key with the expansion content.
+* `CACHE`: the path to the cache file corresponding to `EXPANSION_TYPE`.
 
-#### Query Expansion
+We release the code for generating the key expansion outputs offline under `src/index_expansion` for your reference.
 
+#### Time-Aware Query Expansion
+
+We provide the implementation for pruning out the search space by extracting timestamped events from the sessions, inferring time rage from the query, and using the range to narrow down the search space. First, download the extracted timestamped events [here](https://drive.google.com/file/d/1V9uX_gXaNfo9ij9T14PlAAoFNJ0RMg_m/view?usp=drive_link) and unzip the data under `LongMemEval/index_expansion_logs/`. Next, run the command
+```
+cd src/index_expansion
+python3 temp_query_search_pruning.py TIMESTAMP_EVENT_FILE RETRIEVAL_LOG GRANULARITY
+```
+* `TIMESTAMP_EVENT_FILE` is the extracted timestamped events file you downloaded.
+* `RETRIEVAL_LOG` is the output from any retrieval experiment.
+* `GRANULARITY` is `session` or `turn` and should be consistent with the other two arguments. For the paper, we used `session` as the granularity.
 
 ### Retrieval-Augmented Generation
 
+You may use the following command for question answering with the retrieved memory.
+
+```
+cd src/generation
+bash run_generation.sh RETRIEVAL_LOG_FILE MODEL EXP TOPK [HISTORY_FORMAT] [USERONLY] [READING_METHOD]
+```
+* `RETRIEVAL_LOG_FILE` should be the output from the retrieval step. Specifically, this step relies on the `retrieval_results` field added in the retrieval step.
+* `EXP` should be in the form `[RETRIEVER]-[GRANULARITY]` such as `flat-stella-session`. 
+* The other parameters are the same as introduced above.
 
 ## Citation
 

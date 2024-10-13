@@ -13,7 +13,7 @@ history_format=${5:-"json"}
 useronly=${6:-"false"}
 reading_method=${7:-"cot"}
 merge_key_expansion_into_value=${8:-"none"}
-suffix=${9:-""}
+suffix=${9:-"none"}
 
 declare -A model_zoo
 model_zoo["gpt-4o"]="gpt-4o-2024-08-06"
@@ -41,9 +41,9 @@ else
 fi
 
 retriever_type=""
-if [[ $retriever_alias == "flat-bm25-turn" || $retriever_alias == "flat-contriever-turn" || $retriever_alias == "flat-stella-turn" ]]; then
+if [[ $retriever_alias == "flat-bm25-turn" || $retriever_alias == "flat-contriever-turn" || $retriever_alias == "flat-stella-turn" || $retriever_alias == "flat-gtr-turn" ]]; then
     retriever_type="flat-turn"
-elif [[ $retriever_alias == "flat-bm25-session" || $retriever_alias == "flat-contriever-session" || $retriever_alias == "flat-stella-session" ]]; then
+elif [[ $retriever_alias == "flat-bm25-session" || $retriever_alias == "flat-contriever-session" || $retriever_alias == "flat-stella-session" || $retriever_alias == "flat-gtr-session" ]]; then
     retriever_type="flat-session"
 elif [[ $retriever_alias == "full-history-turn" ]]; then
     retriever_type="orig-turn"
