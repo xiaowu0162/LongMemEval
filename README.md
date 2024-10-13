@@ -1,9 +1,8 @@
 # LongMemEval
 <p align="center">
-  <a href="xxx"><img src="https://img.shields.io/badge/🌐-Website-red" height="20"></a>
-  <a href="xxx"><img src="https://img.shields.io/badge/📝-Paper-blue" height="20"></a>
-  <a href="xxx" ><img src="https://img.shields.io/badge/🐦-Tweet-green
-  " height="20"></a>
+  <a href="xxx"><img src="https://img.shields.io/badge/🌐-Website-red" height="23"></a>
+  <a href="xxx"><img src="https://img.shields.io/badge/📝-Paper-blue" height="23"></a>
+  <a href="https://huggingface.co/datasets/xiaowu0162/longmemeval" ><img src="https://img.shields.io/badge/🤗-Data-green" height="23"></a>
 </p>
 
 🖋 [Di Wu](https://xiaowu0162.github.io/), [Hongwei Wang](https://hongweiw.net/), [Wenhao Yu](https://wyu97.github.io/), [Yuwei Zhang](https://zhang-yu-wei.github.io/), [Kai-Wei Chang](https://web.cs.ucla.edu/~kwchang/), and [Dong Yu](https://sites.google.com/view/dongyu888/)
@@ -27,7 +26,7 @@ We release 500 high quality questions for testing these core long-term memory ab
 
 ### Data
 
-The LongMemEval dataset is officially released [here](https://drive.google.com/file/d/1zJgtYRFhOh5zDQzzatiddfjYhFSnyQ80/view?usp=sharing). Please download and uncompress the data to the `data/` folder. 
+The LongMemEval dataset is officially released [here](https://drive.google.com/file/d/1zJgtYRFhOh5zDQzzatiddfjYhFSnyQ80/view?usp=sharing). Please download and uncompress the data to the `data/` folder. You may also download from [huggingface](https://huggingface.co/datasets/xiaowu0162/longmemeval).
 ```
 mkdir -p data/
 mv longmemeval_data.tar.gz data/ 
