@@ -1,12 +1,29 @@
 # LongMemEval
+<p align="center">
+  <a href="xxx"><img src="https://img.shields.io/badge/🌐-Website-red" height="20"></a>
+  <a href="xxx"><img src="https://img.shields.io/badge/📝-Paper-blue" height="20"></a>
+  <a href="xxx" ><img src="https://img.shields.io/badge/🐦-Tweet-green
+  " height="20"></a>
+</p>
+
+🖋 [Di Wu](https://xiaowu0162.github.io/), [Hongwei Wang](https://hongweiw.net/), [Wenhao Yu](https://wyu97.github.io/), [Yuwei Zhang](https://zhang-yu-wei.github.io/), [Kai-Wei Chang](https://web.cs.ucla.edu/~kwchang/), and [Dong Yu](https://sites.google.com/view/dongyu888/)
 
 We introduce LongMemEval, a comprehensive, challenging, and scalable benchmark for testing the long-term memory of chat assistants. 
 
-[[website]](xxx) [[paper]](xxx) [[tweet]](xxx)
+## 🧠 LongMemEval Overview
+
+We release 500 high quality questions for testing these core long-term memory abilities of chat assistants:
+* Information Extraction
+* Multi-Session Reasoning
+* Knowledge Updates
+* Temporal Reasoning
+* Abstention
 
 ![Example Questions in LongMemEval](assets/longmemeval_examples.png)
 
-## Setup
+ Inspired by the needle-in-a-haystack" test, we design an attribute-controlled pipeline to compile a coherent, extensible, and timestamped chat history for each question. A chat system, then, is required to parse the dynamic interactions online for memorization, and answer the question after all the interaction sessions.
+
+## 🛠️ Setup
 
 ### Data
 
@@ -43,7 +60,7 @@ pip install -r requirements-full.txt
 ```
 We have tested this environment on a Linux machine with CUDA 12.1. If you use a different platform, you may need to modify the requirements.
 
-## Dataset Format
+## 📜 Dataset Format
 
 Three files are included in the data package:
 * `longmemeval_s.json`: The LongMemEval_S introduced in the paper. Concatenating all the chat history roughly consumes 115k tokens (~40 history sessions) for Llama 3. 
@@ -61,7 +78,7 @@ Within each file, there are 500 evaluation instances, each of which contains the
 * `haystack_sessions`: a list of the actual contents of the user-assistant chat history sessions. Each session is a list of turns. Each turn is a direct with the format `{"role": user/assistant, "content": message content}`. For the turns that contain the required evidence, an additional field `has_answer: true` is provided. This label is used for turn-level memory recall accuracy evaluation.
 * `answer_session_ids`: a list of session ids that represent the evidence sessions. This is used for session-level memory recall accuracy evaluation.
 
-## Testing Your System
+## 📊 Testing Your System
 
 To test on LongMemEval, you may directly feed the timestamped history to your own chat system, collect the output, and evaluate with the evaluation script we provide. To do so, save the outputs in a `jsonl` format with each line containing two fields: `question_id` and `hypothesis`. Then, you may run the evaluation script through the following command:
 
@@ -80,11 +97,11 @@ Running this script will save the evaluation logs into a file called `[your_hypo
 python3 print_qa_metrics.py gpt-4o your_hypothesis_file ../../data/longmemeval_oracle.json
 ```
 
-## Creating Custom Chat Histories 
+## 💬 Creating Custom Chat Histories 
 
 LongMemEval supports compiling a chat history of arbitrary length for a question instance, so that you can easily scale up the difficulty over LongMemEval_M. **We will release the code and data for this feature soon.**
 
-## Running Memory System Experiments
+## 🚀 Running Memory System Experiments
 
 We provide the experiment code for memory retrieval and retrieval-augmented question answering under the folder `src/retrieval` and `src/generation`.
 
