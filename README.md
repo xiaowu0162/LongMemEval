@@ -11,7 +11,7 @@ We introduce LongMemEval, a comprehensive, challenging, and scalable benchmark f
 
 ## 🧠 LongMemEval Overview
 
-We release 500 high quality questions for testing these core long-term memory abilities of chat assistants:
+We release 500 high quality questions to test five core long-term memory abilities:
 * Information Extraction
 * Multi-Session Reasoning
 * Knowledge Updates
@@ -20,7 +20,7 @@ We release 500 high quality questions for testing these core long-term memory ab
 
 ![Example Questions in LongMemEval](assets/longmemeval_examples.png)
 
- Inspired by the needle-in-a-haystack" test, we design an attribute-controlled pipeline to compile a coherent, extensible, and timestamped chat history for each question. A chat system, then, is required to parse the dynamic interactions online for memorization, and answer the question after all the interaction sessions.
+ Inspired by the needle-in-a-haystack" test, we design an attribute-controlled pipeline to compile a coherent, extensible, and timestamped chat history for each question. LongMemEval requires chat systems to parse the dynamic interactions online for memorization, and answer the question after all the interaction sessions.
 
 ## 🛠️ Setup
 
