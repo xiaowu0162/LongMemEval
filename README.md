@@ -1,6 +1,6 @@
 # LongMemEval
 <p align="center">
-  <a href="xxx"><img src="https://img.shields.io/badge/🌐-Website-red" height="23"></a>
+  <a href="https://xiaowu0162.github.io/long-mem-eval/"><img src="https://img.shields.io/badge/🌐-Website-red" height="23"></a>
   <a href="xxx"><img src="https://img.shields.io/badge/📝-Paper-blue" height="23"></a>
   <a href="https://huggingface.co/datasets/xiaowu0162/longmemeval" ><img src="https://img.shields.io/badge/🤗-Data-green" height="23"></a>
 </p>
