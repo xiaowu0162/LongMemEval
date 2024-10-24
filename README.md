@@ -206,7 +206,7 @@ bash run_generation.sh RETRIEVAL_LOG_FILE MODEL EXP TOPK [HISTORY_FORMAT] [USERO
 If you find the work useful, please cite:
 
 ```
-@artical{wu2024longmemeval,
+@article{wu2024longmemeval,
       title={LongMemEval: Benchmarking Chat Assistants on Long-Term Interactive Memory}, 
       author={Di Wu and Hongwei Wang and Wenhao Yu and Yuwei Zhang and Kai-Wei Chang and Dong Yu},
       year={2024},
