@@ -98,7 +98,40 @@ python3 print_qa_metrics.py gpt-4o your_hypothesis_file ../../data/longmemeval_o
 
 ## 💬 Creating Custom Chat Histories 
 
-LongMemEval supports compiling a chat history of arbitrary length for a question instance, so that you can easily scale up the difficulty over LongMemEval_M. **We will release the code and data for this feature soon.**
+LongMemEval supports compiling a chat history of arbitrary length for a question instance, so that you can easily scale up the difficulty over `LongMemEval_M`. **We will release the code and data for this feature soon.**
+
+### Downloading the Corpus
+
+Please download the compressed data from [this link](https://drive.google.com/file/d/1Z2swITDSky1mg1_BGAVfhm0kvYlh7LJV/view?usp=sharing) and uncompress the data under `data/custom_history`. The released data contains three parts:
+* `1_attr_bg/data_1_attr_bg.json`: user attibutes and backgrounds. 
+* `2_questions`: questions, answers, evidence statements, as well as the evidence sessions. 
+* `5_filler_sess/data_5_filler_sess.json`: filler sessions sourced from ShareGPT and UltraChat. 
+* `6_session_cache/data_6_session_cache.json`: simulated user sessions based on facts extracted from the backgrounds. 
+
+### Reproducing LongMemEval's History Compilation
+
+You may run `python sample_haystack_and_timestamp.py task n_questions min_n_haystack_filler max_n_haystack_filler enforce_json_length` to reproduce the history compilation in LongMemEval. 
+
+* `task` is the name of the task. In the released data, we used a different naming compared to the paper. Here is the mapping.
+
+    | Name in Data               | Official Name                |
+    |----------------------------|------------------------------|
+    | single_hop                 | single-session-user          |
+    | implicit_preference_v2     | single-session-preference    |
+    | assistant_previnfo         | single-session-assistant     |
+    | two_hop                    | multi-session                |
+    | multi_session_synthesis    | multi-session                |
+    | temp_reasoning_implicit    | temporal-reasoning           |
+    | temp_reasoning_explicit    | temporal-reasoning           |
+    | knowledge_update           | knowledge-update             |
+
+* `n_questions` is the maximum number of questions used. 
+* `min_n_haystack_filler` and `max_n_haystack_filler` sets limits on the number of sessions included in the history. 80 is used for `longmemeval_s` and 500 is used for `longmemeval_m`. 
+* `enforce_json_length` is used to limit the length of the chat history. 115000 is used for `longmemeval_s`. For `longmemeval_m`, this criteria is not used, and you can set it to a large number. 
+
+### Step 3: Custom History
+
+To construct your own chat history, you may follow the format in `2_questions` and `6_session_cache` to create the questions and evidence sessions. Then, you may run `sample_haystack_and_timestamp.py` with a similar command. 
 
 ## 🚀 Running Memory System Experiments
 
