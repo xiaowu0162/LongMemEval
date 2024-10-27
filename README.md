@@ -1,7 +1,7 @@
 # LongMemEval
 <p align="center">
-  <a href="xxx"><img src="https://img.shields.io/badge/🌐-Website-red" height="23"></a>
-  <a href="xxx"><img src="https://img.shields.io/badge/📝-Paper-blue" height="23"></a>
+  <a href="https://xiaowu0162.github.io/long-mem-eval/"><img src="https://img.shields.io/badge/🌐-Website-red" height="23"></a>
+  <a href="https://arxiv.org/pdf/2410.10813.pdf"><img src="https://img.shields.io/badge/📝-Paper-blue" height="23"></a>
   <a href="https://huggingface.co/datasets/xiaowu0162/longmemeval" ><img src="https://img.shields.io/badge/🤗-Data-green" height="23"></a>
 </p>
 
@@ -240,6 +240,12 @@ If you find the work useful, please cite:
 
 ```
 @article{wu2024longmemeval,
-      
+      title={LongMemEval: Benchmarking Chat Assistants on Long-Term Interactive Memory}, 
+      author={Di Wu and Hongwei Wang and Wenhao Yu and Yuwei Zhang and Kai-Wei Chang and Dong Yu},
+      year={2024},
+      eprint={2410.10813},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2410.10813}, 
 }
 ```
