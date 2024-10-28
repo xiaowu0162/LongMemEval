@@ -129,7 +129,7 @@ You may run `python sample_haystack_and_timestamp.py task n_questions min_n_hays
 * `min_n_haystack_filler` and `max_n_haystack_filler` sets limits on the number of sessions included in the history. 80 is used for `longmemeval_s` and 500 is used for `longmemeval_m`. 
 * `enforce_json_length` is used to limit the length of the chat history. 115000 is used for `longmemeval_s`. For `longmemeval_m`, this criteria is not used, and you can set it to a large number. 
 
-### Step 3: Custom History
+### Constructing Your Custom History
 
 To construct your own chat history, you may follow the format in `2_questions` and `6_session_cache` to create the questions and evidence sessions. Then, you may run `sample_haystack_and_timestamp.py` with a similar command. 
 
