@@ -93,7 +93,7 @@ Running this script will save the evaluation logs into a file called `[your_hypo
 ```
 (assuming you are in the src/evaluation folder)
 
-python3 print_qa_metrics.py gpt-4o your_hypothesis_file ../../data/longmemeval_oracle.json
+python3 print_qa_metrics.py gpt-4o your_hypothesis_file.log ../../data/longmemeval_oracle.json
 ```
 
 ## 💬 Creating Custom Chat Histories 
