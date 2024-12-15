@@ -72,7 +72,7 @@ Within each file, there are 500 evaluation instances, each of which contains the
 * `question`: the question content.
 * `answer`: the expected answer from the model.
 * `question_date`: the date of the question.
-* `haystack_session_ids`: a list of the ids of the history sessions (sorted by their timestamp). 
+* `haystack_session_ids`: a list of the ids of the history sessions (sorted by timestamp for `longmemeval_s.json` and `longmemeval_m.json`; not sorted for `longmemeval_oracle.json`). 
 * `haystack_dates`: a list of the timestamps of the history sessions. 
 * `haystack_sessions`: a list of the actual contents of the user-assistant chat history sessions. Each session is a list of turns. Each turn is a direct with the format `{"role": user/assistant, "content": message content}`. For the turns that contain the required evidence, an additional field `has_answer: true` is provided. This label is used for turn-level memory recall accuracy evaluation.
 * `answer_session_ids`: a list of session ids that represent the evidence sessions. This is used for session-level memory recall accuracy evaluation.
