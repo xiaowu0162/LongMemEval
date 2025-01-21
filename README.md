@@ -39,7 +39,7 @@ We recommend using a conda environment for the project. You may follow the steps
 
 #### Evaluation only
 
-If you only need to calculate the metrics on the outputs produced by your own system, you can install this minimal requirement set which allows you to run `src/evaluation/report_metrics.py`.
+If you only need to calculate the metrics on the outputs produced by your own system, you can install this minimal requirement set which allows you to run `src/evaluation/evaluate_qa.py`.
 
 ```
 conda create -n longmemeval-lite python=3.9
