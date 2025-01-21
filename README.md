@@ -83,7 +83,7 @@ To test on LongMemEval, you may directly feed the timestamped history to your ow
 
 ```
 export OPENAI_API_KEY=YOUR_API_KEY
-export OPENAI_ORGANIZATION=YOUR_ORGANIZATION     # may be omitted if your key belongs to one organization
+export OPENAI_ORGANIZATION=YOUR_ORGANIZATION     # may be omitted if your key belongs to only one organization
 cd src/evaluation
 python3 evaluate_qa.py gpt-4o your_hypothesis_file ../../data/longmemeval_oracle.json
 ```
