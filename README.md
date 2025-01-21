@@ -82,8 +82,8 @@ Within each file, there are 500 evaluation instances, each of which contains the
 To test on LongMemEval, you may directly feed the timestamped history to your own chat system, collect the output, and evaluate with the evaluation script we provide. To do so, save the outputs in a `jsonl` format with each line containing two fields: `question_id` and `hypothesis`. Then, you may run the evaluation script through the following command:
 
 ```
-export OPENAI_ORGANIZATION=YOUR_ORGANIZATION
 export OPENAI_API_KEY=YOUR_API_KEY
+export OPENAI_ORGANIZATION=YOUR_ORGANIZATION     # may be omitted if your key belongs to one organization
 cd src/evaluation
 python3 evaluate_qa.py gpt-4o your_hypothesis_file ../../data/longmemeval_oracle.json
 ```
