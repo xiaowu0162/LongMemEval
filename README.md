@@ -20,7 +20,7 @@ We release 500 high quality questions to test five core long-term memory abiliti
 
 ![Example Questions in LongMemEval](assets/longmemeval_examples.png)
 
- Inspired by the needle-in-a-haystack" test, we design an attribute-controlled pipeline to compile a coherent, extensible, and timestamped chat history for each question. LongMemEval requires chat systems to parse the dynamic interactions online for memorization, and answer the question after all the interaction sessions.
+ Inspired by the "needle-in-a-haystack" test, we design an attribute-controlled pipeline to compile a coherent, extensible, and timestamped chat history for each question. LongMemEval requires chat systems to parse the dynamic interactions online for memorization, and answer the question after all the interaction sessions.
 
 ## 🛠️ Setup
 
@@ -39,7 +39,7 @@ We recommend using a conda environment for the project. You may follow the steps
 
 #### Evaluation only
 
-If you only need to calculate the metrics on the outputs produced by your own system, you can install this minimal requirement set which allows you to run `src/evaluation/report_metrics.py`.
+If you only need to calculate the metrics on the outputs produced by your own system, you can install this minimal requirement set which allows you to run `src/evaluation/evaluate_qa.py`.
 
 ```
 conda create -n longmemeval-lite python=3.9
@@ -72,7 +72,7 @@ Within each file, there are 500 evaluation instances, each of which contains the
 * `question`: the question content.
 * `answer`: the expected answer from the model.
 * `question_date`: the date of the question.
-* `haystack_session_ids`: a list of the ids of the history sessions (sorted by their timestamp). 
+* `haystack_session_ids`: a list of the ids of the history sessions (sorted by timestamp for `longmemeval_s.json` and `longmemeval_m.json`; not sorted for `longmemeval_oracle.json`). 
 * `haystack_dates`: a list of the timestamps of the history sessions. 
 * `haystack_sessions`: a list of the actual contents of the user-assistant chat history sessions. Each session is a list of turns. Each turn is a direct with the format `{"role": user/assistant, "content": message content}`. For the turns that contain the required evidence, an additional field `has_answer: true` is provided. This label is used for turn-level memory recall accuracy evaluation.
 * `answer_session_ids`: a list of session ids that represent the evidence sessions. This is used for session-level memory recall accuracy evaluation.
@@ -82,8 +82,8 @@ Within each file, there are 500 evaluation instances, each of which contains the
 To test on LongMemEval, you may directly feed the timestamped history to your own chat system, collect the output, and evaluate with the evaluation script we provide. To do so, save the outputs in a `jsonl` format with each line containing two fields: `question_id` and `hypothesis`. Then, you may run the evaluation script through the following command:
 
 ```
-export OPENAI_ORGANIZATION=YOUR_ORGANIZATION
 export OPENAI_API_KEY=YOUR_API_KEY
+export OPENAI_ORGANIZATION=YOUR_ORGANIZATION     # may be omitted if your key belongs to only one organization
 cd src/evaluation
 python3 evaluate_qa.py gpt-4o your_hypothesis_file ../../data/longmemeval_oracle.json
 ```
@@ -93,7 +93,7 @@ Running this script will save the evaluation logs into a file called `[your_hypo
 ```
 (assuming you are in the src/evaluation folder)
 
-python3 print_qa_metrics.py gpt-4o your_hypothesis_file ../../data/longmemeval_oracle.json
+python3 print_qa_metrics.py gpt-4o your_hypothesis_file.log ../../data/longmemeval_oracle.json
 ```
 
 ## 💬 Creating Custom Chat Histories 
@@ -129,7 +129,7 @@ You may run `python sample_haystack_and_timestamp.py task n_questions min_n_hays
 * `min_n_haystack_filler` and `max_n_haystack_filler` sets limits on the number of sessions included in the history. 80 is used for `longmemeval_s` and 500 is used for `longmemeval_m`. 
 * `enforce_json_length` is used to limit the length of the chat history. 115000 is used for `longmemeval_s`. For `longmemeval_m`, this criteria is not used, and you can set it to a large number. 
 
-### Step 3: Custom History
+### Constructing Your Custom History
 
 To construct your own chat history, you may follow the format in `2_questions` and `6_session_cache` to create the questions and evidence sessions. Then, you may run `sample_haystack_and_timestamp.py` with a similar command. 
 

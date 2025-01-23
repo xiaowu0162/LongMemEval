@@ -60,8 +60,8 @@ if __name__ == '__main__':
         exit()
     metric_model, metric_model_source = model_zoo[metric_model_short]
     if metric_model_source == 'openai':
-        openai.organization = os.getenv('OPENAI_API_KEY')
-        openai_api_key = os.getenv('OPENAI_ORGANIZATION')
+        openai.organization = os.getenv('OPENAI_ORGANIZATION')
+        openai_api_key = os.getenv('OPENAI_API_KEY')
         openai_api_base = None
     else:
         openai_api_key = "EMPTY"
