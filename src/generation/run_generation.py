@@ -319,6 +319,8 @@ def main(args):
         'meta-llama/Meta-Llama-3.1-8B-Instruct': 128000,
         'meta-llama/Meta-Llama-3.1-70B-Instruct': 128000,
         'microsoft/Phi-3-medium-128k-instruct': 120000,
+        'microsoft/Phi-3.5-mini-instruct': 120000,
+        'microsoft/phi-4': 16000,
         'mistral-7b-instruct-v0.2': 32000,
         'mistral-7b-instruct-v0.3': 32000,
         'In2Training/FILM-7B': 32000,

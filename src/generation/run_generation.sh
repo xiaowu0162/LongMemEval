@@ -11,7 +11,7 @@ retriever_alias=$3
 topk_context=${4:-50}
 history_format=${5:-"json"}
 useronly=${6:-"false"}
-reading_method=${7:-"cot"}
+reading_method=${7:-"con"}
 merge_key_expansion_into_value=${8:-"none"}
 suffix=${9:-"none"}
 
@@ -26,6 +26,8 @@ model_zoo["mistral-7b-instruct-v0.2"]="mistralai/Mistral-7B-Instruct-v0.2"
 model_zoo["mistral-7b-instruct-v0.3"]="mistralai/Mistral-7B-Instruct-v0.3"
 model_zoo["film-7b"]="In2Training/FILM-7B"
 model_zoo["phi-3-medium-128k-instruct"]="microsoft/Phi-3-medium-128k-instruct"
+model_zoo["phi-3.5-mini-instruct"]="microsoft/Phi-3.5-mini-instruct"
+model_zoo["phi-4"]="microsoft/phi-4"
 model=${model_zoo["$model_alias"]}
 
 if [[ $model_alias == "gpt-4o" || $model_alias == "gpt-4o-mini" ]]; then
