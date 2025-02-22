@@ -23,6 +23,8 @@ MODEL_ZOO["llama-3.1-8b-instruct"]="meta-llama/Meta-Llama-3.1-8B-Instruct"
 MODEL_ZOO["llama-3.1-70b-instruct"]="meta-llama/Meta-Llama-3.1-70B-Instruct"
 MODEL_ZOO["film-7b"]="In2Training/FILM-7B"
 MODEL_ZOO["phi-3-medium-128k-instruct"]="microsoft/Phi-3-medium-128k-instruct"
+MODEL_ZOO["phi-3.5-mini-instruct"]="microsoft/Phi-3.5-mini-instruct"
+MODEL_ZOO["phi-4"]="microsoft/phi-4"
 model_name=${MODEL_ZOO["$MODEL"]}
 
 python -m vllm.entrypoints.openai.api_server \
