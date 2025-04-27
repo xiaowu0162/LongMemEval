@@ -406,7 +406,7 @@ def main(args):
             except:
                 continue
     print('Ignored {} instances due to abstention: {}'.format(len(ignored_qs_abstention), ignored_qs_abstention))
-    print('Ignored {} instances due to no target: {}'.format(len(ignored_qs_no_target), ignored_qs_no_target))
+    print('Additionally ignored {} instances due to no target turns from the user side: {}'.format(len(ignored_qs_no_target), ignored_qs_no_target))
     print(json.dumps(averaged_results))
 
     # save results
