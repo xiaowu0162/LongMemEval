@@ -386,13 +386,27 @@ def main(args):
         'session': {},
         'turn': {}
     }
+    ignored_qs_abstention, ignored_qs_no_target = set(), set()
     for t in ['session', 'turn']:
         for k in results[0]['retrieval_results']['metrics'][t]:
             try:
-                # will skip abstention instances for reporting the metric
-                averaged_results[t][k] = np.mean([x['retrieval_results']['metrics'][t][k] for x in results if '_abs' not in x['question_id']])
+                results_list = []
+                for eval_entry in results:
+                    # will skip abstention instances for reporting the metric
+                    if '_abs' in eval_entry['question_id']:
+                        ignored_qs_abstention.add(eval_entry['question_id'])
+                        continue
+                    # will also skip instances with no target labels
+                    if not any(('has_answer' in turn) and (turn['has_answer']) for turn in [x for y in eval_entry['haystack_sessions'] for x in y if x['role'] == 'user']):
+                        ignored_qs_no_target.add(eval_entry['question_id'])
+                        continue
+                    results_list.append(eval_entry['retrieval_results']['metrics'][t][k])
+                    
+                averaged_results[t][k] = np.mean(results_list)
             except:
                 continue
+    print('Ignored {} instances due to abstention: {}'.format(len(ignored_qs_abstention), ignored_qs_abstention))
+    print('Ignored {} instances due to no target: {}'.format(len(ignored_qs_no_target), ignored_qs_no_target))
     print(json.dumps(averaged_results))
 
     # save results
