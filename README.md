@@ -98,7 +98,7 @@ python3 print_qa_metrics.py gpt-4o your_hypothesis_file.log ../../data/longmemev
 
 ## 💬 Creating Custom Chat Histories 
 
-LongMemEval supports compiling a chat history of arbitrary length for a question instance, so that you can easily scale up the difficulty over `LongMemEval_M`. **We will release the code and data for this feature soon.**
+LongMemEval supports compiling a chat history of arbitrary length for a question instance, so that you can easily scale up the difficulty over `LongMemEval_M`.
 
 ### Downloading the Corpus
 
