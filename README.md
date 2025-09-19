@@ -22,6 +22,10 @@ We release 500 high quality questions to test five core long-term memory abiliti
 
  Inspired by the "needle-in-a-haystack" test, we design an attribute-controlled pipeline to compile a coherent, extensible, and timestamped chat history for each question. LongMemEval requires chat systems to parse the dynamic interactions online for memorization, and answer the question after all the interaction sessions.
 
+## ⚠️ News
+
+[2025/09] We have further cleaned up the history sessions to prevent interference on answer correctness. The updated benchmark can be found [here](https://huggingface.co/datasets/xiaowu0162/longmemeval-cleaned/) and the change logs can be found [here](https://docs.google.com/spreadsheets/d/16cHPu2B4XhgC-VvolIoWNs8wwm0Zkbpgu8H9x-qhxWg/edit?usp=sharing)
+
 ## 🛠️ Setup
 
 ### Data
