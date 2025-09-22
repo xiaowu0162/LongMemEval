@@ -24,9 +24,9 @@ We release 500 high quality questions to test five core long-term memory abiliti
 
 ## ⚠️ News
 
-[2025/09] We have further cleaned up the history sessions to prevent interference on answer correctness. The updated benchmark can be found [here](https://huggingface.co/datasets/xiaowu0162/longmemeval-cleaned/) and the change logs can be found [here](https://docs.google.com/spreadsheets/d/16cHPu2B4XhgC-VvolIoWNs8wwm0Zkbpgu8H9x-qhxWg/edit?usp=sharing).
-[2025/02] LongMemEval is accepted at ICLR 2025. 
-[2024/10] Benchmark released.
+* [2025/09] We have further cleaned up the history sessions to prevent interference on answer correctness. The updated benchmark can be found [here](https://huggingface.co/datasets/xiaowu0162/longmemeval-cleaned/) and the change logs can be found [here](https://docs.google.com/spreadsheets/d/16cHPu2B4XhgC-VvolIoWNs8wwm0Zkbpgu8H9x-qhxWg/edit?usp=sharing).
+* [2025/02] LongMemEval is accepted at ICLR 2025. 
+* [2024/10] Benchmark released.
 
 ## 🛠️ Setup
 
