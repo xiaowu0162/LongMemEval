@@ -32,11 +32,14 @@ We release 500 high quality questions to test five core long-term memory abiliti
 
 ### Data
 
-The LongMemEval dataset is officially released [here](https://drive.google.com/file/d/1zJgtYRFhOh5zDQzzatiddfjYhFSnyQ80/view?usp=sharing). Please download and uncompress the data to the `data/` folder. You may also download from [huggingface](https://huggingface.co/datasets/xiaowu0162/longmemeval).
+The LongMemEval dataset is officially released at [huggingface](https://huggingface.co/datasets/xiaowu0162/longmemeval-cleaned). Please download and uncompress the data to the `data/` folder. 
 ```
 mkdir -p data/
-mv longmemeval_data.tar.gz data/ 
-cd data ; tar -xzvf longmemeval_data.tar.gz ; cd ..
+cd data/
+wget https://huggingface.co/datasets/xiaowu0162/longmemeval-cleaned/resolve/main/longmemeval_oracle.json
+wget https://huggingface.co/datasets/xiaowu0162/longmemeval-cleaned/resolve/main/longmemeval_s_cleaned.json
+wget https://huggingface.co/datasets/xiaowu0162/longmemeval-cleaned/resolve/main/longmemeval_m_cleaned.json
+cd ..
 ```
 
 ### Environment
