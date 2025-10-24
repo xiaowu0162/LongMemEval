@@ -206,7 +206,7 @@ Also note that for evaluating the retrieval, we always skip the 30 abstention in
 
 #### Index Expansion
 
-To run the experiments with key expansion, download the released key expansion outputs in this [link](https://drive.google.com/file/d/11GGLql5raBn-n7I_v3bSxtyH3ttxATC7/view?usp=sharing) and place the data under the directory `LongMemEval/index_expansion_logs/`. Then, you may run the following command
+To run the experiments with key expansion, download the released key expansion outputs in this [link](https://drive.google.com/file/d/1Y6vImnr_WQZXv4bKzpqPdHMbyoat8b_P/view?usp=sharing) and place the data under the directory `LongMemEval/index_expansion_logs/`. Then, you may run the following command
 ```
 cd src/retrieval
 bash run_retrieval.sh IN_FILE RETRIEVER GRANULARITY EXPANSION_TYPE JOIN_MODE CACHE
@@ -222,7 +222,7 @@ We release the code for generating the key expansion outputs offline under `src/
 
 #### Time-Aware Query Expansion
 
-We provide the implementation for pruning out the search space by extracting timestamped events from the sessions, inferring time rage from the query, and using the range to narrow down the search space. First, download the extracted timestamped events [here](https://drive.google.com/file/d/1V9uX_gXaNfo9ij9T14PlAAoFNJ0RMg_m/view?usp=drive_link) and unzip the data under `LongMemEval/index_expansion_logs/`. Next, run the command
+We provide the implementation for pruning out the search space by extracting timestamped events from the sessions, inferring time rage from the query, and using the range to narrow down the search space. First, download the extracted timestamped events [here](https://drive.google.com/file/d/1ekTMgHPffoaBQV3ZOuv-qV9fW6wJj4eW/view?usp=sharing) and unzip the data under `LongMemEval/index_expansion_logs/`. Next, run the command
 ```
 cd src/index_expansion
 python3 temp_query_search_pruning.py TIMESTAMP_EVENT_FILE RETRIEVAL_LOG GRANULARITY
