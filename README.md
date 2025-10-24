@@ -24,7 +24,7 @@ We release 500 high quality questions to test five core long-term memory abiliti
 
 ## ⚠️ News
 
-* [2025/09] We have further cleaned up the history sessions to prevent interference on answer correctness. The updated benchmark can be found [here](https://huggingface.co/datasets/xiaowu0162/longmemeval-cleaned/) and the change logs can be found [here](https://docs.google.com/spreadsheets/d/16cHPu2B4XhgC-VvolIoWNs8wwm0Zkbpgu8H9x-qhxWg/edit?usp=sharing).
+* [2025/09] We have further cleaned up the history sessions to prevent interference on answer correctness. The updated benchmark can be found [here](https://huggingface.co/datasets/xiaowu0162/longmemeval-cleaned/) and the change logs can be found [here](https://docs.google.com/spreadsheets/d/16cHPu2B4XhgC-VvolIoWNs8wwm0Zkbpgu8H9x-qhxWg/edit?usp=sharing). You may also access the file at this google drive [link](https://drive.google.com/file/d/1zo5C2sKsN3-2TUZt7kiRd2wsZLmyd-4y/view?usp=sharing).
 * [2025/02] LongMemEval is accepted at ICLR 2025. 
 * [2024/10] Benchmark released.
 
@@ -111,7 +111,7 @@ LongMemEval supports compiling a chat history of arbitrary length for a question
 
 ### Downloading the Corpus
 
-Please download the compressed data from [this link](https://drive.google.com/file/d/1zo5C2sKsN3-2TUZt7kiRd2wsZLmyd-4y/view?usp=sharing) and uncompress the data under `data/custom_history`. The released data contains three parts:
+Please download the compressed data from [this link]() and uncompress the data under `data/custom_history`. The released data contains three parts:
 * `1_attr_bg/data_1_attr_bg.json`: user attibutes and backgrounds. 
 * `2_questions`: questions, answers, evidence statements, as well as the evidence sessions. 
 * `5_filler_sess/data_5_filler_sess.json`: filler sessions sourced from ShareGPT and UltraChat. 
