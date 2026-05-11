@@ -9,6 +9,13 @@
 
 We introduce LongMemEval, a comprehensive, challenging, and scalable benchmark for testing the long-term memory of chat assistants. 
 
+## ⚠️ News
+
+* [2026/05] Check out [LongMemEval-V2](https://github.com/xiaowu0162/LongMemEval-V2): long-term memory in agentic context.
+* [2025/09] We have further cleaned up the history sessions to prevent interference on answer correctness. The updated benchmark can be found [here](https://huggingface.co/datasets/xiaowu0162/longmemeval-cleaned/) and the change logs can be found [here](https://docs.google.com/spreadsheets/d/16cHPu2B4XhgC-VvolIoWNs8wwm0Zkbpgu8H9x-qhxWg/edit?usp=sharing). You may also access the file at this google drive [link](https://drive.google.com/file/d/1zo5C2sKsN3-2TUZt7kiRd2wsZLmyd-4y/view?usp=sharing).
+* [2025/02] LongMemEval is accepted at ICLR 2025. 
+* [2024/10] Benchmark released.
+
 ## 🧠 LongMemEval Overview
 
 We release 500 high quality questions to test five core long-term memory abilities:
@@ -21,12 +28,6 @@ We release 500 high quality questions to test five core long-term memory abiliti
 ![Example Questions in LongMemEval](assets/longmemeval_examples.png)
 
  Inspired by the "needle-in-a-haystack" test, we design an attribute-controlled pipeline to compile a coherent, extensible, and timestamped chat history for each question. LongMemEval requires chat systems to parse the dynamic interactions online for memorization, and answer the question after all the interaction sessions.
-
-## ⚠️ News
-
-* [2025/09] We have further cleaned up the history sessions to prevent interference on answer correctness. The updated benchmark can be found [here](https://huggingface.co/datasets/xiaowu0162/longmemeval-cleaned/) and the change logs can be found [here](https://docs.google.com/spreadsheets/d/16cHPu2B4XhgC-VvolIoWNs8wwm0Zkbpgu8H9x-qhxWg/edit?usp=sharing). You may also access the file at this google drive [link](https://drive.google.com/file/d/1zo5C2sKsN3-2TUZt7kiRd2wsZLmyd-4y/view?usp=sharing).
-* [2025/02] LongMemEval is accepted at ICLR 2025. 
-* [2024/10] Benchmark released.
 
 ## 🛠️ Setup
 
