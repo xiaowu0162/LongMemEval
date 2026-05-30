@@ -98,12 +98,12 @@ cd src/evaluation
 python3 evaluate_qa.py gpt-4o your_hypothesis_file ../../data/longmemeval_oracle.json
 ```
 
-Running this script will save the evaluation logs into a file called `[your_hypothesis_file].log`. In this file, each line will contain a new field called `autoeval_label`. While `evaluate_qa.py` already reports the averaged scores, you can also aggregate the scores from the log using the following command:
+Running this script will save the evaluation logs into a file called `[your_hypothesis_file].eval-results-[metric_model]` (e.g., `your_hypothesis_file.eval-results-gpt-4o`). In this file, each line will contain a new field called `autoeval_label`. While `evaluate_qa.py` already reports the averaged scores, you can also aggregate the scores from the log using the following command:
 
 ```
 (assuming you are in the src/evaluation folder)
 
-python3 print_qa_metrics.py gpt-4o your_hypothesis_file.log ../../data/longmemeval_oracle.json
+python3 print_qa_metrics.py your_hypothesis_file.eval-results-gpt-4o ../../data/longmemeval_oracle.json
 ```
 
 ## 💬 Creating Custom Chat Histories 
