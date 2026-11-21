@@ -1,4 +1,4 @@
-# Adapter HTTP client; the official evaluator uses requirements-lite.txt.
-httpx>=0.27
+# Keep the official evaluator's openai==1.35.1 client compatible.
+httpx>=0.27,<0.28
 
 # Offline tests additionally require pytest, installed separately.

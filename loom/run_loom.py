@@ -98,9 +98,8 @@ async def _post(client: httpx.AsyncClient, url: str, body: dict, token: str,
         if 200 <= r.status_code < 300:
             return r.json()
         if 300 <= r.status_code < 400:
-            # follow_redirects is off for POST, so a redirect (http->https,
-            # proxy, trailing slash) would otherwise slip past raise_for_status
-            # (which ignores 3xx) and blow up in r.json() on the redirect body.
+            # Explain how to select the final endpoint instead of following a
+            # redirect for a request carrying credentials.
             raise RuntimeError(
                 f"{url} returned {r.status_code} redirect to "
                 f"{r.headers.get('location', '?')}; point --base-url at the "
@@ -141,7 +140,7 @@ def _history_block(hits: list[dict], key_to_date: dict | None = None) -> str:
 
 
 def _derived_block(derived: dict | None) -> str:
-    """Render the server-computed derived aggregate (co-design [D]) as an
+    """Render the server-computed derived aggregate as an
     authoritative operand block. Empty string when absent so the {computed}
     slot collapses on non-derived questions."""
     if not derived:
@@ -269,7 +268,8 @@ async def _run_item(client: httpx.AsyncClient, base_url: str, token: str, item: 
 
         # 3) Retrieve using the selected search mode.
         search_body: dict = {
-            **identity, "query": str(item["question"]), "top_k": top_k,
+            **identity, "namespace_scope": "this",
+            "query": str(item["question"]), "top_k": top_k,
             "search_mode": search_mode, "alpha": 0.5, "include_top_n_unmatched": 120,
         }
         # Forward an explicitly selected retrieval budget.
@@ -283,7 +283,7 @@ async def _run_item(client: httpx.AsyncClient, base_url: str, token: str, item: 
         search_ms = (time.perf_counter() - _t0) * 1000.0  # NB: under-load (concurrent ingest)
         hits = resp.get("results", [])
         hyde_fired = bool(resp.get("hyde_fallback_used"))
-        # Co-design [D]: server-computed COUNT/SUM/date-diff over per-occurrence
+        # Server-computed COUNT/SUM/date-diff over per-occurrence
         # derived_facts. None on non-derived questions / empty match — the
         # reader then falls back to counting the recalled passages by hand.
         derived = resp.get("derived_aggregate")
@@ -511,11 +511,11 @@ async def main() -> int:
     clean: list[float] = []
     clean_attempted = 0
     if args.measure_latency and latency_results:
-        print(f"\nmeasuring CLEAN serving latency over {len(latency_results)} eligible quiesced searches...", flush=True)
+        print(f"\nmeasuring CLEAN serving latency over {len(latency_results)} eligible sequential post-ingestion searches...", flush=True)
         async with httpx.AsyncClient(timeout=120.0) as lc:
             for r in latency_results:
                 sb = {"org": "dev", "namespace": r["ns"], "agent": "lme-loom", "user_id": "-",
-                      "query": r["query"], "top_k": args.top_k, "search_mode": args.search_mode,
+                      "namespace_scope": "this", "query": r["query"], "top_k": args.top_k, "search_mode": args.search_mode,
                       "alpha": 0.5, "include_top_n_unmatched": 120}
                 if r.get("q_iso"):
                     sb["observation_date"] = r["q_iso"]
@@ -530,7 +530,7 @@ async def main() -> int:
                 clean.append((time.perf_counter() - t0) * 1000.0)
         clean.sort()
         if clean:
-            print(f"CLEAN serving latency (quiesced, 1 query at a time): "
+            print(f"CLEAN serving latency (post-ingestion, 1 query at a time): "
                   f"p50 {_pct(clean, 0.5):.0f}ms  p95 {_pct(clean, 0.95):.0f}ms  min {clean[0]:.0f}ms")
     if args.measure_latency:
         print(f"CLEAN serving latency counts: eligible {len(latency_results)}, "

@@ -49,8 +49,8 @@ class _Resp:
         return self._body
 
     def raise_for_status(self):
-        # Mirror httpx: raise on 4xx/5xx only (NOT 3xx).
-        if 400 <= self.status_code < 600:
+        # Match httpx: only successful responses avoid a status error.
+        if not 200 <= self.status_code < 300:
             raise httpx.HTTPStatusError("err", request=None, response=None)
 
 
@@ -278,13 +278,15 @@ def test_main_latency_preserves_failed_questions(
     assert metrics["latency_loaded_skipped_n"] == len(failed_ids)
     assert searches == ([{
         "org": "dev", "namespace": "offline-namespace", "agent": "lme-loom",
-        "user_id": "-", "query": "question?", "top_k": 30, "search_mode": "rrf",
+        "user_id": "-", "namespace_scope": "this",
+        "query": "question?", "top_k": 30, "search_mode": "rrf",
         "alpha": 0.5, "include_top_n_unmatched": 120,
         "observation_date": "2023-01-01", "retrieval_budget": "fast",
     }] if eligible else [])
     output = capsys.readouterr()
     assert "offline question failure" in output.err
     assert "CLEAN serving latency counts:" in output.out
+    assert "quiesced" not in output.out
     assert "Now grade with the official evaluator:" in output.out
 
 
@@ -337,5 +339,6 @@ def test_item_requires_inline_ingestion(monkeypatch, ingest_response, derived):
             len(R._history_block([])) + len(R._derived_block(derived))
         ) // 4
         assert len(requests) == 2
+        assert requests[1][1]["namespace_scope"] == "this"
         assert reads == [True]
     assert requests[0][1]["defer"] is False

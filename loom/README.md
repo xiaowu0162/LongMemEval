@@ -29,12 +29,15 @@ latency, token savings or a comparison with another memory system.
 - Use an isolated Loom test deployment that supports
   `memory.set_from_messages` with inline `defer: false` and `memory.search`.
   The adapter uses org `dev`, agent `lme-loom` and a random `lme-...` namespace
-  per question. Existing grants must authorize these scopes and operations;
+  per question. Both search passes explicitly use `namespace_scope: "this"`
+  so a wider deployment default cannot mix question namespaces.
+  Existing grants must authorize these scopes and operations;
   the adapter does not provision or broaden grants.
 - Follow the upstream [evaluation-only environment](../README.md#evaluation-only)
   and [dataset instructions](../README.md#data). Use the cleaned dataset
   without substituting another version during a comparison.
 - Install the adapter dependency with `python -m pip install -r loom/requirements.txt`.
+  Its HTTPX range preserves the pinned evaluator client's initialization API.
 - Supply your own `LOOM_TOKEN` and `OPENAI_API_KEY` through the environment.
   The key is used by the reader and the official evaluator. Server-side
   extraction and search may also use configured providers. Running the example
@@ -102,4 +105,4 @@ python -m pytest loom/test_run_loom.py -q
 HTTP, reader and question failures are mocked; this command requires no Loom
 server, provider credentials, model calls or dataset download. The tests cover
 response/retry behavior, reader request settings, dated rendering, extraction
-completion and missing-latency/structured-context accounting.
+completion, explicit question-namespace scope and missing-latency/structured-context accounting.
