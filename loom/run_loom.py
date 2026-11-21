@@ -376,6 +376,8 @@ async def main() -> int:
     p.add_argument("--metrics-out", default="",
                    help="write the latency/token/recall/HyDE metrics summary as JSON here")
     args = p.parse_args()
+    if args.concurrency < 1:
+        p.error("--concurrency must be at least 1")
 
     api_key = os.environ.get("OPENAI_API_KEY", "")
     if not api_key:
