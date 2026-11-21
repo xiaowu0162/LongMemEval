@@ -1,0 +1,4 @@
+# Adapter HTTP client; the official evaluator uses requirements-lite.txt.
+httpx>=0.27
+
+# Offline tests additionally require pytest, installed separately.
